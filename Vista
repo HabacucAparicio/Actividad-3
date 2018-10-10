@@ -1,0 +1,137 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import controlador.ControladorEditor;
+import java.awt.Event;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+        
+public class VistaEditor extends JFrame{
+    JMenuBar mbBarra = new JMenuBar();
+    JMenu mnuArchivo = new JMenu("Archivo");
+    JMenu mnuEditar = new JMenu ("Editar");
+    JMenu mnuAyuda = new JMenu("Ayuda");
+    
+    JMenuItem miCargar = new JMenuItem("Abrir");
+    JMenuItem miGuardar = new JMenuItem("Gurdar");
+    JMenuItem miSalir = new JMenuItem("Salir");
+    //////////////////////////////////////////////
+    JMenuItem miCortar = new JMenuItem("Cortar");
+    JMenuItem miCopiar;
+    JMenuItem miPegar;
+    //////////////////////////////////////////////
+    JPanel panContenedor = new JPanel();
+    JTextArea taEditor = new JTextArea();
+
+    public VistaEditor() {
+        this.setBounds(0,0,400,400);
+        this.setTitle("Mi editor de texto plan");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        
+        this.setJMenuBar(mbBarra);
+        mbBarra.add(mnuArchivo);
+        mbBarra.add(mnuEditar);
+        mbBarra.add(mnuAyuda);
+        mnuArchivo.add(miCargar);
+        mnuArchivo.add(miGuardar);
+        mnuArchivo.add(new JSeparator());
+        mnuArchivo.add(miSalir);
+        //////////////////////////////////////////////////////////
+        Action actionCopiar = taEditor.getActionMap()
+                                      .get(DefaultEditorKit.copyAction);
+        actionCopiar.putValue(Action.NAME, "Copiar");
+        actionCopiar.putValue
+        (Action.ACCELERATOR_KEY, 
+                KeyStroke.getAWTKeyStroke('C',Event.CTRL_MASK));
+        miCopiar = new JMenuItem(actionCopiar);
+        mnuEditar.add(miCopiar);
+        ////////////////////////////////////////////////////////////////
+        
+        Action actionPegar = taEditor.getActionMap()
+                                      .get(DefaultEditorKit.pasteAction);
+        actionPegar.putValue(Action.NAME, "Pegar");
+        actionPegar.putValue
+        (Action.ACCELERATOR_KEY, 
+                KeyStroke.getAWTKeyStroke('V',Event.CTRL_MASK));
+        
+        miPegar = new JMenuItem(actionPegar);
+        mnuEditar.add(miPegar);
+        
+        /////////////////////////////////////////////////////////////////
+        
+               Action actionCortar = taEditor.getActionMap()
+                                      .get(DefaultEditorKit.cutAction);
+               
+        actionCortar.putValue(Action.NAME, "Cortar");
+        actionCortar.putValue
+                
+        (Action.ACCELERATOR_KEY, 
+                KeyStroke.getAWTKeyStroke('X',Event.CTRL_MASK));
+        
+        miPegar = new JMenuItem(actionCortar);
+        mnuEditar.add(miPegar);
+        
+        ////////////////////////////////////////////////////////
+        
+        
+        
+        
+        
+        
+        taEditor.setBounds(0,0,400,350);
+        JScrollPane jscroll = new JScrollPane(taEditor);
+        jscroll.setViewportView(taEditor);
+        this.getContentPane().add(jscroll);
+        
+        panContenedor.add(taEditor);
+        panContenedor.add(jscroll);
+        panContenedor.setLayout(null);
+        
+        this.getContentPane().add(panContenedor);
+        this.setVisible(true);
+         
+    }
+
+    public JMenuItem getMiCargar() {
+        return miCargar;
+    }
+
+    public JMenuItem getMiGuardar() {
+        return miGuardar;
+    }
+
+    public JMenuItem getMiSalir() {
+        return miSalir;
+    }
+
+    public JTextArea getTaEditor() {
+        return taEditor;
+    }
+
+    public void setTaEditor(JTextArea taEditor) {
+        this.taEditor = taEditor;
+    }
+
+    
+     
+    
+    
+    
+    
+    
+}
