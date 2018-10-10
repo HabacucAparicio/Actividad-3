@@ -1,0 +1,110 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model;
+
+import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringReader;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+/**
+ *
+ * @author jesus
+ */
+public class ModeloEditor {
+    FileReader fr;
+    File file;
+    BufferedReader br;
+    String contenido;
+    String rutaGuardar;
+    //String rutar = abrirArchivo();
+    
+    public boolean abrirArchivo(String ruta){
+        file = new File(ruta);
+        rutaGuardar =ruta;
+        try{
+            fr = new FileReader(file);
+            return true;
+        }catch(FileNotFoundException frnEx){
+          return false;  
+        }
+        
+    }
+    
+    
+    public boolean leerArchivo(){
+        contenido = "";
+        br = null;
+        br = new BufferedReader(fr);
+        String linea;
+        try{
+            while((linea = br.readLine()) != null){
+               contenido += linea +"\n";
+            }
+            return true;
+        }catch(IOException ioEx){
+            ioEx.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+    
+    
+    public boolean guardarArchivo(String texto){
+        FileWriter fw;
+        BufferedWriter bw = null;
+        String textoArchivo = "";
+        try{
+            fw = new FileWriter(rutaGuardar);
+            bw = new BufferedWriter(fw);            
+            bw.write(texto);
+            return true;
+        }catch(IOException ioEx){
+            ioEx.printStackTrace();
+            return false;
+        }finally{
+            try{
+                bw.close();
+            }catch(IOException ioEx){
+                ioEx.printStackTrace();
+            }
+        }
+        
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}//////////////////////////
